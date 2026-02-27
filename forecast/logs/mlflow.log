@@ -1,0 +1,163 @@
+/Users/fernandororato/Documents/F5Sys/BOX/compras/forecast/venv/lib/python3.12/site-packages/mlflow/gateway/config.py:454: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  class Route(ConfigModel):
+2025/10/16 10:39:17 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:17 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/10/16 10:39:17 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:17 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     Uvicorn running on http://0.0.0.0:5001 (Press CTRL+C to quit)
+INFO:     Started parent process [52049]
+INFO:     Started server process [52053]
+INFO:     Started server process [52054]
+INFO:     Started server process [52052]
+INFO:     Waiting for application startup.
+INFO:     Waiting for application startup.
+INFO:     Waiting for application startup.
+INFO:     Started server process [52051]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:57417 - "GET /health HTTP/1.1" 200 OK
+2025/10/16 10:39:19 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:19 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57421 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+2025/10/16 10:39:22 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:22 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57424 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57437 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57437 - "GET /static-files/manifest.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57439 - "GET /static-files/static/css/main.f1270cf7.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57438 - "GET /static-files/static/js/main.3d375fe3.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57437 - "GET /static-files/static/js/9478.cbf55ef3.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57437 - "GET /static-files/static/js/3044.8a4b59f2.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57439 - "GET /static-files/static/js/618.eccaaac3.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57438 - "GET /static-files/static/css/3044.41bf106c.chunk.css HTTP/1.1" 200 OK
+2025/10/16 10:39:31 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:31 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57437 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "GET /static-files/static/js/3464.b74283ee.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57444 - "GET /static-files/static/css/301.ca66900f.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57445 - "GET /static-files/static/js/301.78007945.chunk.js HTTP/1.1" 200 OK
+2025/10/16 10:39:37 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:37 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57444 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+2025/10/16 10:39:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:40 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57445 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57444 - "GET /static-files/static/js/6462.1a6a178d.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "GET /static-files/static/js/6742.6cc40d4e.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57445 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=tags.%60mlflow.prompt.is_prompt%60+%3D+%27true%27 HTTP/1.1" 200 OK
+2025/10/16 10:39:42 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:39:42 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57443 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57444 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57452 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57455 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57465 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57504 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57511 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57531 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/7027.6961c163.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/2079.456be601.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /static-files/static/js/5879.8c03c3a7.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57559 - "GET /static-files/static/js/2134.88c9cfcf.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/2231.5a7fbe5e.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "GET /static-files/static/js/4175.8b841372.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/3067.3b0c5ce8.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/2121.02d55e17.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/1240.bbfffe0d.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "GET /static-files/static/js/7816.b5c1abd2.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /static-files/static/js/4153.af01f731.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/1107.c4dd9cf4.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/2587.5e59ba3b.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /static-files/static/js/3428.60ccdc4b.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/9721.bf5e859c.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/5813.33361779.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "GET /static-files/static/js/3285.a7b8bac8.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /static-files/static/js/9640.bcf803af.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "GET /static-files/static/js/3270.96fc46a3.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/js/590.b19ebea6.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/7715.1060ceb2.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /static-files/static/css/experimentPage.b886c467.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /static-files/static/js/experimentPage.4d96c43c.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /static-files/static/js/505.b78801d2.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/css/505.1c6f09d6.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57559 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57555 - "GET /static-files/static/css/1570.21d39143.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "GET /static-files/static/js/2402.1c147bbf.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57558 - "GET /static-files/static/js/1570.e6a5ccf7.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57559 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57556 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57553 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+2025/10/16 10:44:23 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/16 10:44:23 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:57557 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=1&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57564 - "POST /ajax-api/2.0/mlflow/experiments/set-experiment-tag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57564 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57564 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57565 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57566 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57567 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57604 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57632 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57665 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=paraguay_supermarket_forecast HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52053]
+INFO:     Finished server process [52054]
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52051]
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52052]
+INFO:     Received SIGINT, exiting.
+INFO:     Terminated child process [52051]
+INFO:     Terminated child process [52052]
+INFO:     Terminated child process [52053]
+INFO:     Terminated child process [52054]
+INFO:     Waiting for child process [52051]
+INFO:     Waiting for child process [52052]
+INFO:     Waiting for child process [52053]
+INFO:     Waiting for child process [52054]
+INFO:     Stopping parent process [52049]

@@ -1,0 +1,22 @@
+# Dockerfile.mlflow
+FROM ghcr.io/mlflow/mlflow:latest
+
+# Criar arquivo de configuração do Gunicorn
+RUN echo "forwarded_allow_ips = '*'" > /tmp/gunicorn_config.py && \
+    echo "timeout = 120" >> /tmp/gunicorn_config.py && \
+    echo "accesslog = '-'" >> /tmp/gunicorn_config.py && \
+    echo "errorlog = '-'" >> /tmp/gunicorn_config.py
+
+# Script de inicialização customizado
+RUN echo '#!/bin/sh' > /start_mlflow.sh && \
+    echo 'exec mlflow server \' >> /start_mlflow.sh && \
+    echo '  --backend-store-uri file:///mlflow/mlruns \' >> /start_mlflow.sh && \
+    echo '  --default-artifact-root /mlflow/artifacts \' >> /start_mlflow.sh && \
+    echo '  --host 0.0.0.0 \' >> /start_mlflow.sh && \
+    echo '  --port 5000 \' >> /start_mlflow.sh && \
+    echo '  --gunicorn-opts "--config /tmp/gunicorn_config.py --forwarded-allow-ips=* --timeout 120"' >> /start_mlflow.sh && \
+    chmod +x /start_mlflow.sh
+
+WORKDIR /mlflow
+
+CMD ["/start_mlflow.sh"]

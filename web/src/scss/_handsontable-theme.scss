@@ -1,0 +1,192 @@
+// Tema personalizado para Handsontable baseado no CoreUI
+
+// Variáveis de cores do tema light
+$hot-light-bg: var(--cui-body-bg);
+$hot-light-text: var(--cui-body-color);
+$hot-light-border: var(--cui-border-color);
+$hot-light-header-bg: var(--cui-light);
+$hot-light-header-text: var(--cui-body-color);
+$hot-light-selection-bg: var(--cui-primary);
+$hot-light-selection-text: var(--cui-light);
+$hot-light-row-hover: var(--cui-gray-100);
+$hot-light-row-warning: var(--cui-warning-bg-subtle);
+$hot-light-row-danger: var(--cui-danger-bg-subtle);
+
+// Variáveis de cores do tema dark
+$hot-dark-bg: var(--cui-body-bg);
+$hot-dark-text: var(--cui-light);
+$hot-dark-border: var(--cui-border-color);
+$hot-dark-header-bg: var(--cui-dark);
+$hot-dark-header-text: var(--cui-light);
+$hot-dark-selection-bg: var(--cui-primary);
+$hot-dark-selection-text: var(--cui-light);
+$hot-dark-row-hover: var(--cui-gray-800);
+$hot-dark-row-warning: var(--cui-warning-bg-subtle);
+$hot-dark-row-danger: var(--cui-danger-bg-subtle);
+
+// Tema Light
+.handsontable.hot-theme-light {
+  background-color: $hot-light-bg;
+  color: $hot-light-text;
+
+  .wtHolder {
+    background-color: $hot-light-bg;
+  }
+
+  .ht_master .wtHolder {
+    border-color: $hot-light-border;
+  }
+
+  .handsontable {
+    border-color: $hot-light-border;
+  }
+
+  th {
+    background-color: $hot-light-header-bg;
+    color: $hot-light-header-text;
+    border-color: $hot-light-border;
+  }
+
+  tbody th.ht__highlight,
+  thead th.ht__highlight {
+    background-color: $hot-light-header-bg;
+  }
+
+  tbody th:hover,
+  thead th:hover {
+    background-color: var(--cui-gray-200);
+  }
+
+  td {
+    border-color: $hot-light-border;
+  }
+
+  tr:hover td {
+    background-color: $hot-light-row-hover;
+  }
+
+  .current,
+  .area {
+    background-color: $hot-light-selection-bg !important;
+    color: $hot-light-selection-text !important;
+  }
+  
+  // Formatação condicional para linhas
+  .hot-row-warning td {
+    background-color: $hot-light-row-warning !important;
+    color: var(--cui-dark) !important;
+  }
+  
+  .hot-row-danger td {
+    background-color: $hot-light-row-danger !important;
+    color: var(--cui-dark) !important;
+  }
+  
+  // Garantir que o texto permaneça preto quando a célula com formatação condicional está selecionada
+  .hot-row-warning td.current,
+  .hot-row-warning td.area,
+  .hot-row-danger td.current,
+  .hot-row-danger td.area {
+    color: var(--cui-dark) !important;
+  }
+}
+
+// Tema Dark
+.handsontable.hot-theme-dark {
+  background-color: $hot-dark-bg;
+  color: $hot-dark-text;
+
+  .wtHolder {
+    background-color: $hot-dark-bg;
+  }
+
+  .ht_master .wtHolder {
+    border-color: $hot-dark-border;
+  }
+
+  .handsontable {
+    border-color: $hot-dark-border;
+  }
+
+  th {
+    background-color: $hot-dark-header-bg;
+    color: $hot-dark-header-text !important;
+    border-color: $hot-dark-border;
+
+    &.ht__highlight,
+    &.ht__active_highlight {
+      background-color: var(--cui-gray-700);
+      color: $hot-dark-text !important;
+    }
+  }
+
+  tbody th.ht__highlight,
+  thead th.ht__highlight {
+    background-color: var(--cui-gray-700);
+    color: $hot-dark-text !important;
+  }
+
+  .ht__active_highlight {
+    background-color: var(--cui-gray-700) !important;
+    color: $hot-dark-text !important;
+  }
+
+  tbody th:hover,
+  thead th:hover {
+    background-color: var(--cui-gray-700);
+  }
+
+  td {
+    border-color: $hot-dark-border;
+    background-color: $hot-dark-bg;
+    color: $hot-dark-text !important;
+
+    &.htDimmed {
+      background-color: var(--cui-gray-900) !important;
+      color: $hot-dark-text !important;
+    }
+  }
+
+  tr:nth-child(even) td {
+    background-color: var(--cui-gray-900);
+  }
+
+  tr:nth-child(odd) td {
+    background-color: $hot-dark-bg;
+  }
+
+  tr:hover td {
+    background-color: $hot-dark-row-hover;
+  }
+
+  .current,
+  .area {
+    background-color: $hot-dark-selection-bg !important;
+    color: $hot-dark-selection-text !important;
+  }
+
+  .handsontableInput,
+  .handsontableEditor {
+    background-color: var(--cui-gray-900) !important;
+    color: $hot-dark-text !important;
+  }
+  
+  // Formatação condicional para linhas
+  .hot-row-warning td {
+    background-color: $hot-dark-row-warning !important;
+    color: var(--cui-dark) !important;
+  }
+  
+  .hot-row-danger td {
+    background-color: $hot-dark-row-danger !important;
+    color: var(--cui-dark) !important;
+  }
+  
+  // Garantir que o texto permaneça preto quando a célula com formatação condicional está selecionada
+  .hot-row-warning td.current,
+  .hot-row-warning td.area,
+  .hot-row-danger td.current,
+  .hot-row-danger td.area {
+    color: var(--cui-dark) !important;
+  }
+}

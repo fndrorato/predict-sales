@@ -1,0 +1,79 @@
+{
+  "name": "@coreui/coreui-free-react-admin-template-cra",
+  "version": "5.0.0",
+  "description": "CoreUI Free React Admin Template",
+  "homepage": ".",
+  "bugs": {
+    "url": "https://github.com/coreui/coreui-free-react-admin-template-cra/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:coreui/coreui-free-react-admin-template-cra.git"
+  },
+  "license": "MIT",
+  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.js\"",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "test:cov": "npm test -- --coverage --watchAll=false",
+    "test:debug": "react-scripts --inspect-brk test --runInBand"
+  },
+  "dependencies": {
+    "@coreui/chartjs": "^4.0.0",
+    "@coreui/coreui": "^5.0.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.2.1",
+    "@coreui/react": "^5.0.0",
+    "@coreui/react-chartjs": "^3.0.0",
+    "@coreui/utils": "^2.0.2",
+    "@emotion/react": "^11.14.0",
+    "@handsontable/react": "^15.2.0",
+    "@handsontable/react-wrapper": "^15.2.0",
+    "@mantine/core": "^6.0.21",
+    "@mantine/dates": "^6.0.21",
+    "@mantine/hooks": "^6.0.21",
+    "@popperjs/core": "^2.11.8",
+    "@tabler/icons-react": "^3.31.0",
+    "@tanstack/react-table": "^8.21.2",
+    "ag-grid-community": "^33.2.1",
+    "ag-grid-enterprise": "^33.2.1",
+    "ag-grid-react": "^33.2.1",
+    "axios": "^1.8.4",
+    "chart.js": "^4.4.2",
+    "classnames": "^2.5.1",
+    "core-js": "^3.36.1",
+    "dayjs": "^1.11.13",
+    "handsontable": "^15.2.0",
+    "i18next": "^24.2.3",
+    "i18next-browser-languagedetector": "^8.0.4",
+    "mantine-react-table": "^1.3.4",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-app-polyfill": "^3.0.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^15.4.1",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3",
+    "redux": "5.0.1",
+    "simplebar-react": "^3.2.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "3.2.5",
+    "react-scripts": "5.0.1",
+    "sass": "^1.72.0",
+    "web-vitals": "^3.5.2"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  }
+}

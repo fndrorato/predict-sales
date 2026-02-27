@@ -1,0 +1,56 @@
+# Pastas de dependências e cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.zip
+
+# Virtualenvs
+env/
+venv/
+.venv/
+
+# Git e configs locais
+.git
+.gitignore
+.gitattributes
+.idea/
+.vscode/
+*.swp
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Logs e arquivos de debug
+*.log
+
+# Arquivos de build / distribuições
+*.egg-info
+*.egg
+build/
+dist/
+
+# Pasta media (uploads de usuários)
+
+# ou, se usar outra pasta para uploads
+uploads/
+
+# Arquivos estáticos coletados (servidos por Nginx ou CDN)
+staticfiles/
+static/
+# (mas mantenha os "static" de cada app, só ignore a pasta destino de collectstatic)
+
+# Docker
+Dockerfile
+docker-compose.yml
+*.dockerignore
+
+# Credenciais / configs locais
+*.env
+.env.*
+
+# Arquivos CSV
+*.csv

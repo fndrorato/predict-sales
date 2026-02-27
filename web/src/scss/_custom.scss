@@ -1,0 +1,31 @@
+.small-font-table {
+    font-size: 0.8rem; /* Ajuste conforme necessário */
+  }
+
+  .custom-sidebar {
+    width: 14rem !important;
+  }
+
+
+  @media (min-width: 992px) {
+    .sidebar:not(.hide):not(.sidebar-narrow):not(.sidebar-narrow-unfoldable):not(.sidebar-overlaid):not(.sidebar-end) ~ .wrapper {
+      --cui-sidebar-occupy-start: 14rem !important;
+    }
+  }
+
+  /* Sidebar custom styles */
+.custom-sidebar-nav .nav-link {
+  font-size: 0.875rem; /* ou menor: 0.8125rem */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.custom-sidebar-nav .nav-group .nav-group-toggle {
+  font-size: 0.875rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.custom-sidebar-nav .nav-icon {
+  font-size: 1rem; /* ícones menores se quiser */
+}

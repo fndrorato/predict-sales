@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Transferência de Dados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilos customizados para harmonização */
+        body {
+            background-color: #f8f9fa; /* Light background do forecast */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card-custom {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Ajuste para o botão do forecast */
+        .btn-forecast {
+            background-color: #0d6efd; /* Azul primário do Bootstrap */
+            color: white;
+            border-color: #0d6efd;
+        }
+        .btn-forecast:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="card card-custom">
+            <div class="card-body">
+                <h1 class="card-title mb-4">Pipeline de Transferência de Dados</h1>
+                <p>Clique abaixo para iniciar a transferência de dados dos sistemas de origem para o banco de dados de *forecasting*.</p>
+
+                <div class="d-grid gap-2 mb-4">
+                    <a href="/forecast" class="btn btn-forecast btn-lg">
+                        <i class="bi bi-graph-up"></i> IR PARA O FORECAST
+                    </a>
+                </div>
+
+                <hr class="my-4">
+
+                <div id="transfer-actions-area">
+                    <h5>Ações de Transferência:</h5>
+                    
+                    <div class="d-grid gap-2 mb-3">
+                        <button id="start-produtos-btn" class="btn btn-outline-primary">
+                            <i class="bi bi-box"></i> Iniciar Transferência de **Produtos**
+                        </button>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button id="start-oc-btn" class="btn btn-outline-primary">
+                            <i class="bi bi-file-text"></i> Iniciar Transferência das **Ordens de Compra**
+                        </button>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mb-3">
+                        <button id="start-suppliers-btn" class="btn btn-outline-primary">
+                            <i class="bi bi-person-badge"></i> Iniciar Transferência de **Fornecedores**
+                        </button>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button id="start-stock-btn" class="btn btn-outline-primary">
+                            <i class="bi bi-stack"></i> Iniciar Transferência do **Estoque**
+                        </button>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button id="start-vendas-btn" class="btn btn-outline-primary">
+                            <i class="bi bi-cart"></i> Iniciar Transferência de **Vendas**
+                        </button>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div id="progress-area" style="display: none;">
+                    <h5>Status do Processamento: (<span id="current-task-name">Nenhuma Tarefa</span>)</h5>
+                    <div class="progress" style="height: 30px;">
+                        <div id="progress-bar" 
+                             class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" 
+                             style="width: 0%;" 
+                             aria-valuenow="0" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">0%</div>
+                    </div>
+                </div>
+
+                <div id="message-area" class="mt-4">
+                    {% if message %}
+                    <div class="alert {{ 'alert-success' if 'sucesso' in message else 'alert-danger' }}" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const $progressArea = $('#progress-area');
+            const $progressBar = $('#progress-bar');
+            const $messageArea = $('#message-area');
+            const $currentTaskName = $('#current-task-name');
+
+            // Mapeamento das tarefas para URL's e nomes
+            const tasks = {
+                'start-produtos-btn': {
+                    postUrl: '/start_transfer',
+                    progressUrl: '/progress',
+                    name: 'Produtos',
+                    label: '<i class="bi bi-box"></i> Iniciar Transferência de **Produtos**'
+                },
+                'start-oc-btn': {
+                    postUrl: '/start_transfer_orders',
+                    progressUrl: '/progress_orders',
+                    name: 'Ordens de Compra',
+                    label: '<i class="bi bi-file-text"></i> Iniciar Transferência das **Ordens de Compra**'
+                },
+                'start-suppliers-btn': { // NOVA TAREFA
+                    postUrl: '/start_transfer_suppliers', // Adapte a sua rota de POST
+                    progressUrl: '/progress_suppliers',   // Adapte a sua rota de GET de progresso
+                    name: 'Fornecedores',
+                    label: '<i class="bi bi-person-badge"></i> Iniciar Transferência de **Fornecedores**'
+                },
+                'start-stock-btn': {
+                    postUrl: '/start_transfer_stock',
+                    progressUrl: '/progress_stock',
+                    name: 'Estoque',
+                    label: '<i class="bi bi-stack"></i> Iniciar Transferência do **Estoque**'
+                },
+                'start-vendas-btn': {
+                    postUrl: '/start_transfer_sales',
+                    progressUrl: '/progress_sales',
+                    name: 'Vendas',
+                    label: '<i class="bi bi-cart"></i> Iniciar Transferência de **Vendas**'
+                }
+            };
+            
+            let progressInterval;
+            let currentButton = null;
+
+            // Função de polling unificada
+            function startPolling(btnElement, progressUrl, taskName) {
+                const $btn = $(btnElement);
+                currentButton = $btn;
+                
+                $btn.prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Processando...');
+                $progressArea.show();
+                $messageArea.empty();
+                $progressBar.css('width', '0%').text('0%').removeClass('bg-success bg-danger').addClass('progress-bar-animated progress-bar-striped');
+                $currentTaskName.text(taskName);
+
+                progressInterval = setInterval(function() {
+                    $.get(progressUrl)
+                        .done(function(data) {
+                            const pct = data.progress || 0;
+                            const error = data.error;
+
+                            // Atualiza a barra
+                            $progressBar.css('width', pct + '%').text(pct + '%').attr('aria-valuenow', pct);
+                            
+                            // Lógica de Conclusão ou Erro
+                            if (pct >= 100 || error) {
+                                clearInterval(progressInterval);
+                                // Re-habilita todos os botões e restaura o texto
+                                restoreAllButtons(); 
+
+                                if (error) {
+                                    $messageArea.html('<div class="alert alert-danger" role="alert">❌ Erro na Transferência de ' + taskName + ': ' + error + '</div>');
+                                    $progressBar.removeClass('progress-bar-animated progress-bar-striped').addClass('bg-danger');
+                                } else {
+                                    $messageArea.html('<div class="alert alert-success" role="alert">✅ Transferência de ' + taskName + ' Concluída!</div>');
+                                    $progressBar.removeClass('progress-bar-animated progress-bar-striped').addClass('bg-success');
+                                }
+                                $currentTaskName.text('Nenhuma Tarefa');
+                                $progressArea.delay(3000).fadeOut(); // Esconde a barra após 3 segundos
+                            }
+                        })
+                        .fail(function() {
+                            clearInterval(progressInterval);
+                            restoreAllButtons();
+                            $messageArea.html('<div class="alert alert-danger" role="alert">Erro de comunicação com o servidor.</div>');
+                            $currentTaskName.text('Nenhuma Tarefa');
+                        });
+                }, 1000); // Poll a cada 1 segundo
+            }
+
+            // Função para restaurar o estado inicial dos botões (usa o mapa 'tasks')
+            function restoreAllButtons() {
+                for (const id in tasks) {
+                    $('#' + id).prop('disabled', false).html(tasks[id].label);
+                }
+            }
+
+            // Ação unificada do Botão
+            $('.card-body').on('click', 'button[id^="start-"]', function() {
+                const buttonId = this.id;
+                const task = tasks[buttonId];
+                
+                if (!task) return;
+
+                // Para evitar a duplicação de polling caso clique em outro botão
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                }
+                
+                // 1. Dispara a tarefa POST
+                $.post(task.postUrl)
+                    .done(function(resp) {
+                        console.log("Resposta do Servidor:", resp.message);
+                        if (resp.status === 'started' || resp.status === 'running' || resp.message.includes('iniciada')) {
+                            // Passa o nome da tarefa para a função de polling
+                            startPolling($('#' + buttonId), task.progressUrl, task.name); 
+                        } else {
+                            restoreAllButtons();
+                            $messageArea.html('<div class="alert alert-warning" role="alert">Não foi possível iniciar a tarefa: ' + (resp.message || 'Resposta inesperada.') + '</div>');
+                        }
+                    })
+                    .fail(function(jqXHR) {
+                         restoreAllButtons();
+                         $currentTaskName.text('Nenhuma Tarefa');
+                         const errorMsg = jqXHR.responseJSON ? jqXHR.responseJSON.message : "Erro desconhecido ao iniciar.";
+                         $messageArea.html('<div class="alert alert-danger" role="alert">❌ Falha ao iniciar ' + task.name + ': ' + errorMsg + '</div>');
+                    });
+            });
+        });
+    </script>
+
+</body>
+</html>

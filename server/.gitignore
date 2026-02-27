@@ -1,0 +1,43 @@
+# Arquivos e diretórios específicos do Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+media/
+staticfiles/
+
+# Arquivos e diretórios específicos do ambiente virtual
+venv/
+env/
+
+# Arquivos de configuração do IDE
+.idea/
+.vscode/
+
+# Arquivos de dependências
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Arquivos de cache
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Outros arquivos e diretórios
+*.bak
+*.swp
+*.~lock.*
+.DS_Store
+.env
+.flake8
+
+# Arquivos de dados
+*.csv
+modelos/*.json
+
+*.sqlite3

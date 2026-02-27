@@ -1,0 +1,56 @@
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 120px;
+  width: 2px;
+  background: #e9ecef;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 25px;
+  display: flex;
+}
+
+.timeline-left {
+  width: 120px;
+  text-align: right;
+  margin-top: 24px;
+  padding-right: 15px;
+  flex-shrink: 0;
+}
+
+.timeline-date {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #6c757d;
+}
+
+.timeline-user {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.timeline-badge {
+  position: absolute;
+  left: 120px;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-content {
+  margin-left: 30px;
+  flex-grow: 1;
+}

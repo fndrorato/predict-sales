@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Execução de Forecasting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card-custom {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .store-checkbox {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background: white;
+        }
+        .store-checkbox:hover {
+            background: #f8f9fa;
+        }
+        #stores-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-custom">
+            <div class="card-body">
+                <h1 class="card-title mb-4">Pipeline de Forecasting de Vendas</h1>
+                <p>Selecione as lojas e clique para iniciar o cálculo dos modelos de previsão.</p>
+
+                <!-- ✅ SELETOR DE LOJAS -->
+                <div class="mb-4">
+                    <h5>Selecione as Lojas:</h5>
+                    
+                    <!-- Botões de Seleção Rápida -->
+                    <div class="mb-3">
+                        <button id="select-all-btn" class="btn btn-sm btn-outline-primary">
+                            ✓ Selecionar Todas
+                        </button>
+                        <button id="deselect-all-btn" class="btn btn-sm btn-outline-secondary">
+                            ✗ Desmarcar Todas
+                        </button>
+                        <span id="selected-count" class="ms-3 badge bg-info">0 selecionadas</span>
+                    </div>
+
+                    <!-- Container de Checkboxes -->
+                    <div id="stores-container">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </div>
+                            <p class="mt-2">Carregando lojas...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão de Execução -->
+                <div class="d-grid gap-2">
+                    <button id="start-forecast-btn" class="btn btn-success btn-lg" disabled>
+                        <i class="bi bi-play-fill"></i> EXECUTAR PREVISÃO
+                    </button>
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Barra de Progresso -->
+                <div id="progress-area" style="display: none;">
+                    <h5>Status do Processamento:</h5>
+                    <div class="progress" style="height: 30px;">
+                        <div id="progress-bar" 
+                             class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" 
+                             style="width: 0%;" 
+                             aria-valuenow="0" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">0%</div>
+                    </div>
+                    <p id="progress-text" class="mt-2 text-center"></p>
+                </div>
+
+                <!-- Mensagens -->
+                <div id="message-area" class="mt-4">
+                    {% if status.data %}
+                        <div class="alert alert-success" role="alert">
+                            ✅ Previsão Concluída! {{ status.total }} registros salvos.
+                        </div>
+                    {% elif status.error %}
+                        <div class="alert alert-danger" role="alert">
+                            ❌ Erro: {{ status.error }}
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const $btn = $('#start-forecast-btn');
+            const $progressArea = $('#progress-area');
+            const $progressBar = $('#progress-bar');
+            const $progressText = $('#progress-text');
+            const $messageArea = $('#message-area');
+            const $storesContainer = $('#stores-container');
+            const $selectedCount = $('#selected-count');
+            
+            let progressInterval;
+            let availableStores = [];
+
+            // ==========================================
+            // 1. CARREGAR LOJAS
+            // ==========================================
+            // No forecast.html, modificar a função renderStores:
+
+            function renderStores(stores) {
+                let html = '';
+                
+                stores.forEach(function(store) {
+                    // Informação adicional se disponível
+                    let extraInfo = '';
+                    if (store.item_count) {
+                        extraInfo = `<small class="text-muted">(${store.item_count} itens ativos)</small>`;
+                    }
+                    
+                    html += `
+                        <div class="store-checkbox">
+                            <div class="form-check">
+                                <input class="form-check-input store-check" 
+                                    type="checkbox" 
+                                    value="${store.store_id}" 
+                                    id="store-${store.store_id}">
+                                <label class="form-check-label" for="store-${store.store_id}">
+                                    <strong>Loja ${store.store_id}</strong> - ${store.store_name || 'Sem nome'}
+                                    ${extraInfo}
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                $storesContainer.html(html);
+                $('.store-check').on('change', updateSelectedCount);
+                updateSelectedCount();
+            }
+
+            // E mudar a chamada para usar a rota detalhada:
+            function loadStores() {
+                $.get('/get_stores_detailed')  // ✅ Usar rota detalhada
+                    .done(function(response) {
+                        if (response.status === 'success') {
+                            availableStores = response.stores;
+                            renderStores(availableStores);
+                        }
+                    })
+                    .fail(function() {
+                        $storesContainer.html(
+                            '<div class="alert alert-danger">Erro ao carregar lojas</div>'
+                        );
+                    });
+            }
+
+            // ==========================================
+            // 3. ATUALIZAR CONTADOR DE SELECIONADAS
+            // ==========================================
+            function updateSelectedCount() {
+                const selectedCount = $('.store-check:checked').length;
+                $selectedCount.text(selectedCount + ' selecionada' + (selectedCount !== 1 ? 's' : ''));
+                
+                // Habilitar botão se pelo menos 1 loja selecionada
+                $btn.prop('disabled', selectedCount === 0);
+            }
+
+            // ==========================================
+            // 4. BOTÕES DE SELEÇÃO RÁPIDA
+            // ==========================================
+            $('#select-all-btn').on('click', function() {
+                $('.store-check').prop('checked', true);
+                updateSelectedCount();
+            });
+
+            $('#deselect-all-btn').on('click', function() {
+                $('.store-check').prop('checked', false);
+                updateSelectedCount();
+            });
+
+            // ==========================================
+            // 5. OBTER LOJAS SELECIONADAS
+            // ==========================================
+            function getSelectedStores() {
+                const selected = [];
+                $('.store-check:checked').each(function() {
+                    selected.push(parseInt($(this).val()));
+                });
+                return selected;
+            }
+
+            // ==========================================
+            // 6. MONITORAR PROGRESSO
+            // ==========================================
+            function startPolling() {
+                $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Processando...');
+                $progressArea.show();
+                $messageArea.empty();
+
+                progressInterval = setInterval(function() {
+                    $.get('/forecast_progress')
+                        .done(function(data) {
+                            const pct = data.progress || 0;
+                            const completed = data.completed || 0;
+                            const total = data.total || 0;
+                            const error = data.error;
+
+                            // Atualizar barra
+                            $progressBar.css('width', pct + '%')
+                                       .text(pct + '%')
+                                       .attr('aria-valuenow', pct);
+                            
+                            // Atualizar texto
+                            if (total > 0) {
+                                $progressText.text(`${completed} de ${total} itens processados`);
+                            }
+                            
+                            // Conclusão ou erro
+                            if (pct >= 100 || error) {
+                                clearInterval(progressInterval);
+                                $btn.prop('disabled', false).html('<i class="bi bi-play-fill"></i> EXECUTAR PREVISÃO');
+
+                                if (error) {
+                                    $messageArea.html(
+                                        '<div class="alert alert-danger" role="alert">❌ Erro: ' + error + '</div>'
+                                    );
+                                    $progressBar.removeClass('progress-bar-animated progress-bar-striped')
+                                               .addClass('bg-danger');
+                                } else {
+                                    $messageArea.html(
+                                        '<div class="alert alert-success" role="alert">✅ Previsão Concluída! ' + 
+                                        completed + ' itens processados.</div>'
+                                    );
+                                    $progressBar.removeClass('progress-bar-animated progress-bar-striped')
+                                               .addClass('bg-success');
+                                }
+                            }
+                        })
+                        .fail(function() {
+                            clearInterval(progressInterval);
+                            $btn.prop('disabled', false).html('<i class="bi bi-play-fill"></i> EXECUTAR PREVISÃO');
+                            $messageArea.html(
+                                '<div class="alert alert-danger" role="alert">Erro de comunicação com o servidor.</div>'
+                            );
+                        });
+                }, 1000);
+            }
+
+            // ==========================================
+            // 7. EXECUTAR FORECAST
+            // ==========================================
+            $btn.on('click', function() {
+                const selectedStores = getSelectedStores();
+                
+                if (selectedStores.length === 0) {
+                    $messageArea.html(
+                        '<div class="alert alert-warning" role="alert">⚠️ Selecione pelo menos uma loja!</div>'
+                    );
+                    return;
+                }
+
+                // Confirmação
+                const confirmMsg = `Executar forecast para ${selectedStores.length} loja(s)?\n\nLojas: ${selectedStores.join(', ')}`;
+                if (!confirm(confirmMsg)) {
+                    return;
+                }
+
+                // Enviar requisição
+                $.ajax({
+                    url: '/start_forecast',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        store_ids: selectedStores
+                    }),
+                    success: function(resp) {
+                        console.log("Resposta:", resp);
+                        if (resp.status === 'started' || resp.status === 'running') {
+                            startPolling();
+                        }
+                    },
+                    error: function(jqXHR) {
+                        const errorMsg = jqXHR.responseJSON ? jqXHR.responseJSON.message : "Erro desconhecido";
+                        $messageArea.html(
+                            '<div class="alert alert-danger" role="alert">❌ Falha ao iniciar: ' + errorMsg + '</div>'
+                        );
+                    }
+                });
+            });
+
+            // ==========================================
+            // INICIALIZAÇÃO
+            // ==========================================
+            loadStores();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+  "login": {
+    "title": "Login",
+    "signIn": "Sign In to your account",
+    "username": "Username",
+    "password": "Password",
+    "loginButton": "Login",
+    "forgotPassword": "Forgot password?"
+  },
+  "users": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "email": "Email",
+    "isActive": "Active",
+    "editUser": "Edit User",
+    "newUser": "New User",
+    "usernameRequired": "Username is required",
+    "emailRequired": "Email is required",
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "group": "Group",
+    "selectGroup": "Select a group",
+    "groupRequired": "Group is required"
+  },
+  "register": {
+    "title": "Register",
+    "createAccount": "Create your account",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "createButton": "Create Account"
+  },
+  "widgets": {
+    "noSalesProducts": "Products in Stock Without Sales",
+    "monthlyPunctuality": "Monthly Punctuality Rate",
+    "monthlyServiceRate": "Monthly Service Rate",
+    "problemPurchaseOrders": "Purchase Orders with Issues"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "save": "Save",
+    "savedSuccessfully": "Saved successfully",
+    "errorSaving": "Error saving",
+    "success": "Success",
+    "error": "Error"
+  },
+  "header": {
+    "account": "Account",
+    "updates": "Updates",
+    "messages": "Messages",
+    "tasks": "Tasks",
+    "comments": "Comments",
+    "settings": "Settings",
+    "profile": "Profile",
+    "payments": "Payments",
+    "projects": "Projects",
+    "lockAccount": "Lock Account",
+    "logout": "Logout",
+    "changePassword": "Change Password"
+  },
+  "stockErrors": {
+    "title": "Stock Errors",
+    "code": "Code",
+    "name": "Name",
+    "supplier": "Supplier",
+    "brand": "Brand",
+    "section": "Section",
+    "subsection": "Subsection",
+    "nivel3": "Level 3",
+    "nivel4": "Level 4",
+    "nivel5": "Level 5",
+    "store": "Store",
+    "stockAvailable": "Available Stock",
+    "stockAvailableOn": "Available On"
+  },
+  "agGrid": {
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "equals": "Equals",
+    "notEqual": "Not equal",
+    "startsWith": "Starts with",
+    "endsWith": "Ends with",
+    "filterOoo": "Filter...",
+    "loadingOoo": "Loading...",
+    "searchOoo": "Search...",
+    "selectAll": "Select All",
+    "selectAllSearchResults": "Select All Search Results",
+    "clearFilter": "Clear Filter",
+    "clearSearch": "Clear Search",
+    "blanks": "Blanks",
+    "noMatches": "No matches",
+    "greaterThan": "Greater than",
+    "greaterThanOrEqual": "Greater than or equal to",
+    "lessThan": "Less than",
+    "lessThanOrEqual": "Less than or equal to",
+    "between": "Between"
+  }
+}
